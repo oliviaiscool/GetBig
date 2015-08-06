@@ -44,6 +44,7 @@ There is only one level, because it's an infinite runner. Obstacles are scrolled
 		- [x] Allow user to jump when the screen is tapped
 		- [x] Allow user to change sizes
 		- [ ] Spawn new obstacles
+		- [ ] Scroll the level with the camera
 * Week 2 (8/10 - 8/14)
 	- [ ] Polish Game! Add animations and other cool stuff. 
 
