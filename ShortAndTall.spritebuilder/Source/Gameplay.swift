@@ -81,7 +81,7 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
                 hero.physicsBody.applyImpulse(ccp(0, 10))
                 print("You're too heavy to jump!")
             } else {
-                hero.physicsBody.applyImpulse(ccp(0, 600))
+                hero.physicsBody.applyImpulse(ccp(0, 2000))
             }
         }
     }
