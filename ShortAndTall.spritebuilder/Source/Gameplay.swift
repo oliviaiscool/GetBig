@@ -81,7 +81,7 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
                 hero.physicsBody.applyImpulse(ccp(0, 10))
                 print("You're too heavy to jump!")
             } else {
-                hero.physicsBody.applyImpulse(ccp(0, 200))
+                hero.physicsBody.applyImpulse(ccp(0, 600))
             }
         }
     }
@@ -126,7 +126,9 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
     
         func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, ice: CCNode!) -> ObjCBool {
             if tallHero.visible == true {
-                println("SMASH! :) ")
+                let smashed = CCBReader.load("smashed") as! CCParticleSystem
+                obstaclesLayer.addChild(smashed)
+                smashed.position.x = hero.position.x + 31
                 return false
             } else {
                 didCollide = true
@@ -149,16 +151,19 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
             prevObstaclePos = obstacles.last!.position.x
         }
         
+        // ---------- FIRE OR ICE? -----------
+
         if randomInstance >= 50 {
             let obstacle = CCBReader.load("Obstacle") as! Obstacle
-            obstacle.position = ccp(prevObstaclePos + distanceBetweenObstacles, 0)
+            obstacle.position = ccp(prevObstaclePos + distanceBetweenObstacles, 50)
             obstaclesLayer.addChild(obstacle)
             obstacles.append(obstacle)
         } else {
             let obstacle = CCBReader.load("Smash") as! Smash
-            obstacle.position = ccp(prevObstaclePos + distanceBetweenObstacles, 0)
+            obstacle.position = ccp(prevObstaclePos + distanceBetweenObstacles, 50)
             obstaclesLayer.addChild(obstacle)
             obstacles.append(obstacle)
+
         }
         
     }
