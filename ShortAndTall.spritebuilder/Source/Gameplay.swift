@@ -58,7 +58,7 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
     
     func gameOver() {
         //wait for a little bit
-        var delay = CCActionDelay(duration: 4)
+        var delay = CCActionDelay(duration: 0)
         
         //go back to the main screen
         var goBack = CCActionCallBlock(block: {self.backToStart()})
