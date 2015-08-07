@@ -1,5 +1,3 @@
-# Welcome to the Short and Tall Wiki!
-
 ## Objective
 
 For as long as possible, avoid the red blocks on the ground and get the highest possible score. Collect multiplier in order to get higher scores. Complete missions to unlock higher multiplier. 
