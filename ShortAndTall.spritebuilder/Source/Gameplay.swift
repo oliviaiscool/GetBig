@@ -58,7 +58,7 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
     
     func gameOver() {
         //wait for a little bit
-        var delay = CCActionDelay(duration: 0)
+        var delay = CCActionDelay(duration: 1)
         
         //go back to the main screen
         var goBack = CCActionCallBlock(block: {self.backToStart()})
@@ -75,7 +75,7 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
             } else { // if false
                 tallHero.visible = true
             }
-        } else { // if you didn't tap the change size side of the screen
+        } else {
             // ---------- IF hero IS SMALL, IT CAN JUMP ON TOUCH -----------
             if (tallHero.visible == true ) {
                 hero.physicsBody.applyImpulse(ccp(0, 10))
@@ -96,6 +96,7 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
         tallHero.physicsBody.sensor = true
         
         tallHero.position.y = hero.boundingBox().height
+
         
         // ---------- OBSTACLE SCROLLING ---------- & ---------- GAME OVER SOLUTION -----------
         if didCollide == true {
@@ -112,19 +113,29 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
                     spawnRandomObstacle()
                 }
                 
-                obstacle.position.x -= 4
+                if (obstaclesAvoided <= 15) {
+                    obstacle.position.x -= 4
+                } else if (obstaclesAvoided <= 30){
+                    obstacle.position.x -= 8
+                } else if (obstaclesAvoided <= 45){
+                    obstacle.position.x -= 12
+                } else {
+                    obstacle.position.x -= 16
+                }
             }
+            
+        
         }
     }
 
     
         // ---------- OBSTACLE COLLISION TESTING -----------
-        func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, fire: CCNode!) -> ObjCBool {
+        func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, fire: Obstacle!) -> ObjCBool {
             didCollide = true
             return true
         }
     
-        func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, ice: CCNode!) -> ObjCBool {
+        func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, ice: Smash!) -> ObjCBool {
             if tallHero.visible == true {
                 let smashed = CCBReader.load("smashed") as! CCParticleSystem
                 obstaclesLayer.addChild(smashed)

@@ -10,15 +10,4 @@ import UIKit
 
 class Obstacle: CCNode, CCPhysicsCollisionDelegate {
     
-    
-   
-    func didLoadFromCCB() {
-        
-    }
-    
-
-    
-    override func update(delta: CCTime) {
-
-    }
 }
