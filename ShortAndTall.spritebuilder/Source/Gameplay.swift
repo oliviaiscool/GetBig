@@ -60,16 +60,31 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
     
     func backToStart() {
         let mainScene = CCBReader.loadAsScene("MainScene")
-        CCDirector.sharedDirector().presentScene(mainScene)
+        
+        var scene = CCScene()
+        scene.addChild(mainScene)
+        
+        var transition = CCTransition(fadeWithDuration: 0.5)
+        
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
     func play() {
         let gameplay = CCBReader.loadAsScene("Gameplay")
-        CCDirector.sharedDirector().presentScene(gameplay)
+        
+        var scene = CCScene()
+        scene.addChild(gameplay)
+        
+        var transition = CCTransition(fadeWithDuration: 0.5)
+        
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
     func showGameOverScene() {
+        userInteractionEnabled = false
+        
         gameOverScene.visible = true
+        
         currentScore.string = String(obstaclesAvoided)
     }
     func gameOver() {
@@ -131,11 +146,17 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
                 }
                 
                 if (obstaclesAvoided <= 10) {
-                    obstacle.position.x -= 4
-                } else if (obstaclesAvoided <= 25){
-                    obstacle.position.x -= 8
-                } else if (obstaclesAvoided <= 45){
-                    obstacle.position.x -= 12
+                    obstacle.position.x -= 2.5
+                } else if (obstaclesAvoided <= 20){
+                    obstacle.position.x -= 5
+                } else if (obstaclesAvoided <= 30){
+                    obstacle.position.x -= 7.5
+                } else if (obstaclesAvoided <= 45) {
+                    obstacle.position.x -= 10
+                } else if (obstaclesAvoided <= 60) {
+                    obstacle.position.x -= 12.5
+                } else if (obstaclesAvoided <= 75) {
+                    obstacle.position.x -= 15
                 } else {
                     obstacle.position.x -= 16
                 }

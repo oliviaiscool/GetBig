@@ -182,7 +182,7 @@
 									<key>value</key>
 									<array>
 										<real>284</real>
-										<real>95.999992370605469</real>
+										<real>160</real>
 									</array>
 								</dict>
 							</array>
@@ -228,7 +228,7 @@
 						<key>value</key>
 						<array>
 							<real>284</real>
-							<real>95.999992370605469</real>
+							<real>160</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -549,7 +549,7 @@
 									<key>value</key>
 									<array>
 										<real>284</real>
-										<real>54.999996185302734</real>
+										<real>69.999992370605469</real>
 									</array>
 								</dict>
 							</array>
@@ -595,7 +595,7 @@
 						<key>value</key>
 						<array>
 							<real>284</real>
-							<real>54.999996185302734</real>
+							<real>69.999992370605469</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -609,7 +609,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.58148193359375</real>
 						</array>
 					</dict>
 					<dict>
@@ -887,8 +887,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -925,7 +923,7 @@
 						<key>value</key>
 						<array>
 							<real>284</real>
-							<real>187.00001525878906</real>
+							<real>234</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>

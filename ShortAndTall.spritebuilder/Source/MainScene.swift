@@ -4,11 +4,23 @@ class MainScene: CCNode {
     
     func play() {
         let gameplay = CCBReader.loadAsScene("Gameplay")
-        CCDirector.sharedDirector().presentScene(gameplay)
+        
+        var scene = CCScene()
+        scene.addChild(gameplay)
+        
+        var transition = CCTransition(fadeWithDuration: 0.5)
+        
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
     func credits() {
         let credits = CCBReader.loadAsScene("Credits")
-        CCDirector.sharedDirector().presentScene(credits)
+        
+        var scene = CCScene()
+        scene.addChild(credits)
+        
+        var transition = CCTransition(fadeWithDuration: 0.5)
+        
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
 }

@@ -12,6 +12,12 @@ class Credits: CCScene {
     
     func backToStart() {
         let mainScene = CCBReader.loadAsScene("MainScene")
-        CCDirector.sharedDirector().presentScene(mainScene)
+        
+        var scene = CCScene()
+        scene.addChild(mainScene)
+        
+        var transition = CCTransition(fadeWithDuration: 0.5)
+        
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
 }
