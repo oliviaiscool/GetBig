@@ -10,6 +10,7 @@
 		211B13111B6ACDCE00C0D95C /* Gameplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211B13101B6ACDCE00C0D95C /* Gameplay.swift */; };
 		21ADD8D81B712E4500A32108 /* Smash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21ADD8D71B712E4500A32108 /* Smash.swift */; };
 		21E846341B712A6D0096D259 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E846331B712A6D0096D259 /* Obstacle.swift */; };
+		21F96FCB1B791D9F00A38FB4 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F96FCA1B791D9F00A38FB4 /* Credits.swift */; };
 		5B121030197484FA004C1E1D /* ShortAndTallActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* ShortAndTallActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
 		7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A046D7519E84C36004C4763 /* MainScene.swift */; };
@@ -154,6 +155,7 @@
 		211B13101B6ACDCE00C0D95C /* Gameplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gameplay.swift; path = Source/Gameplay.swift; sourceTree = "<group>"; };
 		21ADD8D71B712E4500A32108 /* Smash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Smash.swift; sourceTree = "<group>"; };
 		21E846331B712A6D0096D259 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
+		21F96FCA1B791D9F00A38FB4 /* Credits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Credits.swift; path = Source/Credits.swift; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
 		5B12100F197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121011197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				7A046D7519E84C36004C4763 /* MainScene.swift */,
 				211B13101B6ACDCE00C0D95C /* Gameplay.swift */,
+				21F96FCA1B791D9F00A38FB4 /* Credits.swift */,
 				21ADD8D71B712E4500A32108 /* Smash.swift */,
 				21E846331B712A6D0096D259 /* Obstacle.swift */,
 				D352B48019EC608A00829775 /* MetalShaders */,
@@ -826,6 +829,7 @@
 				21ADD8D81B712E4500A32108 /* Smash.swift in Sources */,
 				21E846341B712A6D0096D259 /* Obstacle.swift in Sources */,
 				7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */,
+				21F96FCB1B791D9F00A38FB4 /* Credits.swift in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

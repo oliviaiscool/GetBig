@@ -14,6 +14,7 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
     weak var gamePhysicsBody: CCPhysicsNode!
     weak var gameplayNode: CCNode!
     weak var obstaclesLayer: CCNode!
+    weak var gameOverScene: CCNode!
     
     //about the hero
     weak var hero: CCNode!
@@ -24,6 +25,7 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
     //controlling score
     var obstaclesAvoided: Int = 0
     weak var scoreLabel: CCLabelTTF!
+    weak var currentScore: CCLabelTTF!
     
     //generating obstacles
     var obstacles: [CCNode] = []
@@ -32,7 +34,9 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
     let distanceBetweenObstacles : CGFloat = 250
     
     func didLoadFromCCB() {
+        
         gamePhysicsBody.debugDraw = false
+        gamePhysicsBody.collisionDelegate = self
         
         // -------------------- ALLOW TOUCH RECOGNITION --------------------
         userInteractionEnabled = true
@@ -43,8 +47,11 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
         tallHero.visible = false
         tallHero.physicsBody.sensor = true
         
-        gamePhysicsBody.collisionDelegate = self
         
+        //--------------------- PREPARE GAME OVER ------------------------
+        gameOverScene.visible = false
+        
+        // ---------------- SPAWN FIRST THREE OBSTACLES -------------------
         spawnRandomObstacle()
         spawnRandomObstacle()
         spawnRandomObstacle()
@@ -56,13 +63,23 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
         CCDirector.sharedDirector().presentScene(mainScene)
     }
     
+    func play() {
+        let gameplay = CCBReader.loadAsScene("Gameplay")
+        CCDirector.sharedDirector().presentScene(gameplay)
+    }
+    
+    func showGameOverScene() {
+        gameOverScene.visible = true
+        currentScore.string = String(obstaclesAvoided)
+    }
     func gameOver() {
         //wait for a little bit
         var delay = CCActionDelay(duration: 1)
         
+        
         //go back to the main screen
-        var goBack = CCActionCallBlock(block: {self.backToStart()})
-        runAction(CCActionSequence(array: [delay, goBack]))
+        var endGame = CCActionCallBlock(block: {self.showGameOverScene()})
+        runAction(CCActionSequence(array: [delay, endGame]))
     }
     
     
@@ -113,9 +130,9 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
                     spawnRandomObstacle()
                 }
                 
-                if (obstaclesAvoided <= 15) {
+                if (obstaclesAvoided <= 10) {
                     obstacle.position.x -= 4
-                } else if (obstaclesAvoided <= 30){
+                } else if (obstaclesAvoided <= 25){
                     obstacle.position.x -= 8
                 } else if (obstaclesAvoided <= 45){
                     obstacle.position.x -= 12
