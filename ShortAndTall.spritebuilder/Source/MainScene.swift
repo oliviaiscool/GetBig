@@ -6,13 +6,13 @@ class MainScene: CCNode {
 
     func didLoadFromCCB() {
         
-        OALSimpleAudio.sharedInstance().playBg("Sky.mp3", loop: true)
+        OALSimpleAudio.sharedInstance().playBg("PROTODOME - CHIPFUNK - 04 Interstellar Good Times..mp3", loop: true)
         OALSimpleAudio.sharedInstance().muted = false
         
     }
     
     func toggleMusic() {
-        if OALSimpleAudio.sharedInstance().muted {
+        if OALSimpleAudio.sharedInstance().muted {  
             OALSimpleAudio.sharedInstance().muted = false
         } else {
             OALSimpleAudio.sharedInstance().muted = true

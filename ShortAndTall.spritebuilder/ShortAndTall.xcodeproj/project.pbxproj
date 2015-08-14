@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		211B13111B6ACDCE00C0D95C /* Gameplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211B13101B6ACDCE00C0D95C /* Gameplay.swift */; };
+		212542171B7E8D650099DDCB /* PROTODOME - CHIPFUNK - 04 Interstellar Good Times..mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 212542161B7E8D650099DDCB /* PROTODOME - CHIPFUNK - 04 Interstellar Good Times..mp3 */; };
 		21265AC61B7E1DD2000BA89E /* Open.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21265AC51B7E1DD2000BA89E /* Open.swift */; };
 		21265AC81B7E3B2F000BA89E /* Sky.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21265AC71B7E3B2F000BA89E /* Sky.mp3 */; };
 		214F78A61B7BB7FE00235E0F /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214F78A51B7BB7FE00235E0F /* Tutorial.swift */; };
@@ -158,6 +159,7 @@
 
 /* Begin PBXFileReference section */
 		211B13101B6ACDCE00C0D95C /* Gameplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gameplay.swift; path = Source/Gameplay.swift; sourceTree = "<group>"; };
+		212542161B7E8D650099DDCB /* PROTODOME - CHIPFUNK - 04 Interstellar Good Times..mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "PROTODOME - CHIPFUNK - 04 Interstellar Good Times..mp3"; path = "Source/PROTODOME - CHIPFUNK - 04 Interstellar Good Times..mp3"; sourceTree = "<group>"; };
 		21265AC51B7E1DD2000BA89E /* Open.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Open.swift; path = Source/Open.swift; sourceTree = "<group>"; };
 		21265AC71B7E3B2F000BA89E /* Sky.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Sky.mp3; path = Source/Sky.mp3; sourceTree = "<group>"; };
 		214F78A51B7BB7FE00235E0F /* Tutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tutorial.swift; path = Source/Tutorial.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				21265AC71B7E3B2F000BA89E /* Sky.mp3 */,
+				212542161B7E8D650099DDCB /* PROTODOME - CHIPFUNK - 04 Interstellar Good Times..mp3 */,
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				7A046D7519E84C36004C4763 /* MainScene.swift */,
 				211B13101B6ACDCE00C0D95C /* Gameplay.swift */,
@@ -759,6 +762,7 @@
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
 				B71F5916188484E7003F4D28 /* iPhone-old@2x.png in Resources */,
+				212542171B7E8D650099DDCB /* PROTODOME - CHIPFUNK - 04 Interstellar Good Times..mp3 in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
 				21265AC81B7E3B2F000BA89E /* Sky.mp3 in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,

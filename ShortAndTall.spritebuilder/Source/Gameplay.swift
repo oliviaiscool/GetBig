@@ -177,7 +177,7 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
                 obstacle.position.x -= CGFloat(scrollSpeed)
                 
                 if scrollSpeed < 12 {
-                    scrollSpeed += 0.0005
+                    scrollSpeed += 0.0008
                 }
             }
         } else {
@@ -267,7 +267,7 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
             obstacle.position = ccp(prevObstaclePos + distanceBetweenObstacles, 50)
             obstaclesLayer.addChild(obstacle)
             obstacles.append(obstacle)
-        } else if randomInstance <= 99 {
+        } else if randomInstance <= 98 {
             let obstacle = CCBReader.load("Smash") as! Smash
             obstacle.position = ccp(prevObstaclePos + distanceBetweenObstacles, 50)
             obstaclesLayer.addChild(obstacle)

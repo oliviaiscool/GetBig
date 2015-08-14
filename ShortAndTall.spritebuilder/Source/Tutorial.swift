@@ -160,7 +160,7 @@ class Tutorial: CCNode, CCPhysicsCollisionDelegate {
             }
             if isGameOver == false {
             if objectiveMet == false {
-                obstacle.position.x -= CGFloat(0.75)
+                obstacle.position.x -= CGFloat(1.5)
             } else if objectiveMet {
                 
                 if currentSection == .Jump {
