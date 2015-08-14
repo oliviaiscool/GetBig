@@ -19,4 +19,12 @@ class Open: CCNode {
         
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
+    
+    func toggleMusic() {
+        if OALSimpleAudio.sharedInstance().muted {
+            OALSimpleAudio.sharedInstance().muted = false
+        } else {
+            OALSimpleAudio.sharedInstance().muted = true
+        }
+    }
 }

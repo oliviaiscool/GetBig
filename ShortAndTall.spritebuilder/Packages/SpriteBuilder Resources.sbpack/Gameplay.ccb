@@ -763,8 +763,6 @@
 								<real>1</real>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -3565,7 +3563,7 @@
 						<key>displayName</key>
 						<string>bestScore</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>highScoreLabel</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -3760,6 +3758,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -5062,7 +5062,7 @@
 			<key>soundChannel</key>
 			<dict>
 				<key>isExpanded</key>
-				<false/>
+				<true/>
 				<key>keyframes</key>
 				<array/>
 				<key>type</key>

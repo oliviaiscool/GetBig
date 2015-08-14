@@ -9,6 +9,14 @@
 import Foundation
 
 class Gameplay: CCScene , CCPhysicsCollisionDelegate {
+    var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    
+    var highScore: Int = NSUserDefaults.standardUserDefaults().integerForKey("getHighScore") ?? 0 {
+        didSet {
+            defaults.setInteger(highScore, forKey: "getHighScore")
+            defaults.synchronize()
+        }
+    }
     
     // MARK: Variables: basic content nodes
     weak var gamePhysicsBody: CCPhysicsNode!
@@ -19,12 +27,7 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
     
     // MARK: Variables: about the hero
     weak var hero: CCNode!
-    var highScore: Int = NSUserDefaults.standardUserDefaults().integerForKey("myHighScore") ?? 0 {
-        didSet {
-            NSUserDefaults.standardUserDefaults().setInteger(highScore, forKey:"myHighScore")
-            NSUserDefaults.standardUserDefaults().synchronize()
-        }
-    }
+  
     weak var tallHero: CCNode!
     
     // MARK: Variables: controlling score
@@ -46,6 +49,7 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
     weak var currentScore: CCLabelTTF!
     weak var currentMultiplierLabel: CCLabelTTF!
     weak var actualScore: CCLabelTTF!
+    weak var highScoreLabel: CCLabelTTF!
     
     // MARK: Variables: generating obstacles
     var obstacles: [CCNode] = []
@@ -111,6 +115,12 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
         currentMultiplierLabel.string = String(scoreMultiplier)
         
         actualScore.string = String(obstaclesAvoided * scoreMultiplier)
+        
+        if obstaclesAvoided * scoreMultiplier > highScore {
+            highScore = obstaclesAvoided * scoreMultiplier
+        }
+        
+        highScoreLabel.string = String(highScore)
         
         self.animationManager.runAnimationsForSequenceNamed("Gameover")
     }
