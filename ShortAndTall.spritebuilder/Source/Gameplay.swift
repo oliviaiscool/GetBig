@@ -10,54 +10,81 @@ import Foundation
 
 class Gameplay: CCScene , CCPhysicsCollisionDelegate {
     
-    //basic content nodes
+    // MARK: Variables: basic content nodes
     weak var gamePhysicsBody: CCPhysicsNode!
-    weak var gameplayNode: CCNode!
     weak var obstaclesLayer: CCNode!
     weak var gameOverScene: CCNode!
     
-    //about the hero
+    var isGameOver: Bool = false
+    
+    // MARK: Variables: about the hero
     weak var hero: CCNode!
+    var highScore: Int = NSUserDefaults.standardUserDefaults().integerForKey("myHighScore") ?? 0 {
+        didSet {
+            NSUserDefaults.standardUserDefaults().setInteger(highScore, forKey:"myHighScore")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
     weak var tallHero: CCNode!
     
-    var didCollide = false
-    
-    //controlling score
-    var obstaclesAvoided: Int = 0
+    // MARK: Variables: controlling score
+    var obstaclesAvoided: Int = 0 {
+        didSet{
+            if isGameOver == false {
+                scoreLabel.string = "\(obstaclesAvoided)"
+            }
+        }
+    }
+    var scoreMultiplier: Int = 1 {
+        didSet{
+            multiplierLabel.string = "\(scoreMultiplier)"
+        }
+    }
+    weak var multiplierLabel: CCLabelTTF!
+    weak var multiplierArea: CCNode!
     weak var scoreLabel: CCLabelTTF!
     weak var currentScore: CCLabelTTF!
+    weak var currentMultiplierLabel: CCLabelTTF!
+    weak var actualScore: CCLabelTTF!
     
-    //generating obstacles
+    // MARK: Variables: generating obstacles
     var obstacles: [CCNode] = []
     var randomInstance: UInt32!
     let firstObstaclePosition : CGFloat = 280
     let distanceBetweenObstacles : CGFloat = 250
+    var scrollSpeed: Double = 1
+    
+    weak var smashed: SmashParticles!
     
     func didLoadFromCCB() {
         
         gamePhysicsBody.debugDraw = false
         gamePhysicsBody.collisionDelegate = self
         
-        // -------------------- ALLOW TOUCH RECOGNITION --------------------
+        // MARK: Allow touch recognition
         userInteractionEnabled = true
         multipleTouchEnabled = true
         
+        // MARK: Score calculating setup
+        multiplierArea.visible = false
         
-        // -------------------- CHANGE SIZE SET UP --------------------
+        // MARK: Morphing setup
         tallHero.visible = false
         tallHero.physicsBody.sensor = true
         
         
-        //--------------------- PREPARE GAME OVER ------------------------
+        // MARK: Prepare game over
         gameOverScene.visible = false
         
-        // ---------------- SPAWN FIRST THREE OBSTACLES -------------------
+        // MARK: Spawn first three obstacles
         spawnRandomObstacle()
         spawnRandomObstacle()
         spawnRandomObstacle()
-
+        
+        smashed.visible = false
+        
     }
-    
+
     func backToStart() {
         let mainScene = CCBReader.loadAsScene("MainScene")
         
@@ -65,7 +92,6 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
         scene.addChild(mainScene)
         
         var transition = CCTransition(fadeWithDuration: 0.5)
-        
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
@@ -76,39 +102,36 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
         scene.addChild(gameplay)
         
         var transition = CCTransition(fadeWithDuration: 0.5)
-        
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
     func showGameOverScene() {
-        userInteractionEnabled = false
-        
         gameOverScene.visible = true
-        
         currentScore.string = String(obstaclesAvoided)
+        currentMultiplierLabel.string = String(scoreMultiplier)
+        
+        actualScore.string = String(obstaclesAvoided * scoreMultiplier)
+        
+        self.animationManager.runAnimationsForSequenceNamed("Gameover")
     }
+    
     func gameOver() {
-        //wait for a little bit
-        var delay = CCActionDelay(duration: 1)
-        
-        
-        //go back to the main screen
-        var endGame = CCActionCallBlock(block: {self.showGameOverScene()})
-        runAction(CCActionSequence(array: [delay, endGame]))
+        userInteractionEnabled = false
+        scheduleOnce("showGameOverScene", delay: 0.1)
     }
     
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         
-        // -------------------- CHANGE SIZE --------------------
-        if (touch.locationInNode(gameplayNode).x >= 250.00) {
+        // MARK: Changing the hero's size
+        if (touch.locationInNode(self).x >= 250.00) {
             if (tallHero.visible == true) {
                 tallHero.visible = false
             } else { // if false
                 tallHero.visible = true
             }
         } else {
-            // ---------- IF hero IS SMALL, IT CAN JUMP ON TOUCH -----------
+            // MARK: Telling the hero to jump
             if (tallHero.visible == true ) {
                 hero.physicsBody.applyImpulse(ccp(0, 10))
                 print("You're too heavy to jump!")
@@ -118,7 +141,6 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
         }
     }
     
-    // -----------  UPDATE FUNCTION ~ CALLED EVERY SINGLE FRAME -------------
     override func update(delta: CCTime) {
         
         let velocityY = clampf(Float(hero.physicsBody.velocity.y), -Float(CGFloat.max), 200)
@@ -129,11 +151,8 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
         
         tallHero.position.y = hero.boundingBox().height
 
-        
-        // ---------- OBSTACLE SCROLLING ---------- & ---------- GAME OVER SOLUTION -----------
-        if didCollide == true {
-            gameOver()
-        } else {
+        if isGameOver == false {
+        // MARK: Obstacle scrolling
             for obstacle in obstacles.reverse() {
                 
                 // obstacle moved past left side of screen?
@@ -145,52 +164,83 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
                     spawnRandomObstacle()
                 }
                 
-                if (obstaclesAvoided <= 10) {
-                    obstacle.position.x -= 2.5
-                } else if (obstaclesAvoided <= 20){
-                    obstacle.position.x -= 5
-                } else if (obstaclesAvoided <= 30){
-                    obstacle.position.x -= 7.5
-                } else if (obstaclesAvoided <= 45) {
-                    obstacle.position.x -= 10
-                } else if (obstaclesAvoided <= 60) {
-                    obstacle.position.x -= 12.5
-                } else if (obstaclesAvoided <= 75) {
-                    obstacle.position.x -= 15
-                } else {
-                    obstacle.position.x -= 16
+                obstacle.position.x -= CGFloat(scrollSpeed)
+                
+                if scrollSpeed < 12 {
+                    scrollSpeed += 0.0005
                 }
             }
-            
-        
+        } else {
+            for obstacle in obstacles.reverse() {
+                
+                obstacle.physicsBody.sensor = true
+                
+                // obstacle moved past left side of screen?
+                if obstacle.position.x < (obstacle.contentSize.width) {
+                    obstacle.removeFromParent()
+                    obstacles.removeAtIndex(find(obstacles, obstacle)!)
+                    
+                    // for each removed obstacle, add a new one
+                    spawnRandomObstacle()
+                }
+                
+                obstacle.position.x -= CGFloat(scrollSpeed)
+                
+                
+            }
         }
     }
 
     
-        // ---------- OBSTACLE COLLISION TESTING -----------
+        // MARK: Colliding with an obstacle
         func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, fire: Obstacle!) -> ObjCBool {
-            didCollide = true
+            if isGameOver == false {
+                isGameOver = true
+                gameOver()
+            }
+            
             return true
         }
     
         func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, ice: Smash!) -> ObjCBool {
-            if tallHero.visible == true {
-                let smashed = CCBReader.load("smashed") as! CCParticleSystem
-                obstaclesLayer.addChild(smashed)
-                smashed.position.x = hero.position.x + 31
-                return false
-            } else {
-                didCollide = true
-                return true
+            if isGameOver == false {
+            
+                if tallHero.visible == true {
+                    ice.visible = false
+                    smashed.visible = true
+                    smashed.resetSystem()
+                    return false
+                } else {
+                    isGameOver = true
+                    gameOver()
+                    return true
+                }
             }
+            return true
         }
     
-        // ---------- SCORE UPDATE -----------
-        func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, sensor: CCNode!) -> ObjCBool {
-            obstaclesAvoided += 1
-            scoreLabel.string = String(obstaclesAvoided)
+        // MARK: Colliding with a collectable
+    
+        func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, collectable: CCParticleSystem!) -> ObjCBool {
+            multiplierArea.visible = true
+            
+            if isGameOver == false {
+                scoreMultiplier += 1
+                collectable.removeFromParent()
+            }
+            
             return false
         }
+    
+        // MARK: Score update,  colliding with score sensor
+        func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, sensor: CCNode!) -> ObjCBool {
+            if isGameOver == false {
+                obstaclesAvoided += 1
+            }
+            
+            return false
+        }
+    
     
     func spawnRandomObstacle(){
         var prevObstaclePos = firstObstaclePosition
@@ -200,10 +250,20 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
             prevObstaclePos = obstacles.last!.position.x
         }
         
-        // ---------- FIRE OR ICE? -----------
+        // MARK: Choosing random obstacle/collectable to spawn
 
-        if randomInstance >= 50 {
+        if randomInstance <= 49 {
             let obstacle = CCBReader.load("Obstacle") as! Obstacle
+            obstacle.position = ccp(prevObstaclePos + distanceBetweenObstacles, 50)
+            obstaclesLayer.addChild(obstacle)
+            obstacles.append(obstacle)
+        } else if randomInstance <= 99 {
+            let obstacle = CCBReader.load("Smash") as! Smash
+            obstacle.position = ccp(prevObstaclePos + distanceBetweenObstacles, 50)
+            obstaclesLayer.addChild(obstacle)
+            obstacles.append(obstacle)
+        } else if obstaclesAvoided > 11 {
+            let obstacle = CCBReader.load("collectable") as! CCParticleSystem
             obstacle.position = ccp(prevObstaclePos + distanceBetweenObstacles, 50)
             obstaclesLayer.addChild(obstacle)
             obstacles.append(obstacle)
@@ -212,9 +272,6 @@ class Gameplay: CCScene , CCPhysicsCollisionDelegate {
             obstacle.position = ccp(prevObstaclePos + distanceBetweenObstacles, 50)
             obstaclesLayer.addChild(obstacle)
             obstacles.append(obstacle)
-
         }
-        
     }
-
 }
