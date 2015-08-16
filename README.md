@@ -1,33 +1,29 @@
 ## Objective
-
-For as long as possible, avoid the red blocks on the ground and get the highest possible score. Collect multiplier in order to get higher scores. Complete missions to unlock higher multiplier. 
+For as long as possible, avoid the red blocks on the ground and get the highest possible score. When tall blue walls appear, tap right to get large enough to crash through them. 
 
 ## Gameplay Mechanics
-
-Players can only jump and change their height. Multiplier hangs in the air, not affected by gravity. 
-
-When the player becomes taller, they get heavier and are not able to jump. 
+Players can only jump and change their height. When the player becomes taller, they get heavier and are not able to jump. 
 
 ## Level Design
-
-There is only one level, because it's an infinite runner. Obstacles are scrolled in, at varying heights. Occasionally, multiplier will appear in the sky. 
+There is only one level, because it's an infinite runner. Obstacles are scrolled in, at varying heights. Very rarely, multiplier will appear on the floor to pick up. 
 
 ##Technical
 
 ### Scenes
-
 1. Start
 2. Gameplay
 3. Game Over 
+4. Credits
+5. Tutorial
 
 ### Controls/Input
-
-* Tap to jump
-* Press magic button to change heights
+* Tap left to jump
+* Tap right to change heights
 
 ### Classes/CCBs
 * Scenes
 	* Start
+	* Tutorial
 	* Gameplay
 	* Game Over
 *Nodes/Sprites
@@ -36,14 +32,17 @@ There is only one level, because it's an infinite runner. Obstacles are scrolled
 	* Multiplier
 
 ## MVP Milestones
-
 * Week 1 (8/3 - 3/7)
-	- [ ] Basic Game -> Shipped to the App Store
+	- [x] Basic Game 
 		- [x] Allow user to jump when the screen is tapped
 		- [x] Allow user to change sizes
-		- [ ] Spawn new obstacles
-		- [ ] Scroll the level with the camera
+		- [x] Spawn new obstacles
+		- [x] Scroll obstacles, rather than level
 * Week 2 (8/10 - 8/14)
-	- [ ] Polish Game! Add animations and other cool stuff. 
+	- [x] Polish Game! Add animations and other cool stuff
 
 
+## TODO: 
+ - [ ] Add haptic feedback
+ - [ ] Add game center integration 
+ - [ ] Add customization features
